@@ -16,7 +16,7 @@ import { EmergencyAccessRequest } from '../types.js';
 
 interface OverviewDashboardProps {
   accessRequests: EmergencyAccessRequest[];
-  onNavigateTab: (tab: 'overview' | 'send-request' | 'emergency-requests' | 'patients' | 'hospital-network') => void;
+  onNavigateTab: (tab: 'overview' | 'emergency-requests' | 'patients' | 'hospital-network') => void;
   onSelectRequest?: (req: EmergencyAccessRequest) => void;
 }
 
@@ -58,7 +58,7 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Header Title with Give Request CTA */}
+      {/* Header Title with Patient Search CTA */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">Emergency Operations</h1>
@@ -67,11 +67,10 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
           </p>
         </div>
         <button
-          onClick={() => onNavigateTab('send-request')}
+          onClick={() => onNavigateTab('patients')}
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm hover:shadow transition-all"
         >
-          <Send className="h-3.5 w-3.5" />
-          <span>New Emergency Request</span>
+          <span>Patient Intake</span>
         </button>
       </div>
 

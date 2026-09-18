@@ -8,7 +8,6 @@ import {
   LogOut,
   Network,
   Plus,
-  Send,
   Settings,
   ShieldAlert,
   Users,
@@ -16,7 +15,6 @@ import {
 
 export type PortalTab =
   | 'overview'
-  | 'send-request'
   | 'emergency-requests'
   | 'patients'
   | 'audit-log'
@@ -43,11 +41,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       id: 'overview' as PortalTab,
       label: 'Overview',
       icon: LayoutDashboard,
-    },
-    {
-      id: 'send-request' as PortalTab,
-      label: 'New Emergency Request',
-      icon: Send,
     },
     {
       id: 'emergency-requests' as PortalTab,

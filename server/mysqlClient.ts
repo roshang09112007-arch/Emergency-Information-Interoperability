@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { EmergencyAccessRequest } from '../src/types.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'pulsekey-emergency-jwt-secret-2026';
 
@@ -396,13 +397,51 @@ export async function runMigrations(conn: PoolConnection) {
       emergency_case_id VARCHAR(64) NOT NULL,
       reason TEXT NOT NULL,
       status VARCHAR(32) NOT NULL DEFAULT 'PENDING',
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      approved_at TIMESTAMP NULL,
-      expires_at TIMESTAMP NULL,
+      created_at VARCHAR(64) NOT NULL,
+      approved_at VARCHAR(64) NULL,
+      expires_at VARCHAR(64) NULL,
+      patient_name VARCHAR(128) DEFAULT '',
+      dob VARCHAR(32) DEFAULT '',
+      requester_name VARCHAR(128) DEFAULT '',
+      role VARCHAR(64) DEFAULT 'EMERGENCY_PHYSICIAN',
+      urgency_level VARCHAR(32) DEFAULT 'CRITICAL_TRAUMA',
+      decided_at VARCHAR(64) NULL,
+      decided_by VARCHAR(128) NULL,
+      notes TEXT NULL,
+      zk_token MEDIUMTEXT NULL,
       INDEX idx_req_patient (patient_did),
       INDEX idx_req_case (emergency_case_id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   `);
+
+  const extraCols = [
+    { name: 'patient_name', type: "VARCHAR(128) DEFAULT ''" },
+    { name: 'dob', type: "VARCHAR(32) DEFAULT ''" },
+    { name: 'requester_name', type: "VARCHAR(128) DEFAULT ''" },
+    { name: 'role', type: "VARCHAR(64) DEFAULT 'EMERGENCY_PHYSICIAN'" },
+    { name: 'urgency_level', type: "VARCHAR(32) DEFAULT 'CRITICAL_TRAUMA'" },
+    { name: 'decided_at', type: 'VARCHAR(64) NULL' },
+    { name: 'decided_by', type: 'VARCHAR(128) NULL' },
+    { name: 'notes', type: 'TEXT NULL' },
+    { name: 'zk_token', type: 'MEDIUMTEXT NULL' },
+  ];
+
+  for (const col of extraCols) {
+    try {
+      await conn.query(`ALTER TABLE access_requests ADD COLUMN ${col.name} ${col.type}`);
+    } catch {}
+  }
+
+  const colModifications = [
+    'ALTER TABLE access_requests MODIFY COLUMN created_at VARCHAR(64) NOT NULL',
+    'ALTER TABLE access_requests MODIFY COLUMN approved_at VARCHAR(64) NULL',
+    'ALTER TABLE access_requests MODIFY COLUMN expires_at VARCHAR(64) NULL',
+  ];
+  for (const mod of colModifications) {
+    try {
+      await conn.query(mod);
+    } catch {}
+  }
 
   // 6. audit_logs
   await conn.query(`
@@ -779,79 +818,192 @@ export async function getHospitalRecordsByPatientDid(
 // -------------------------------------------------------------
 
 export async function createAccessRequestDb(data: {
-  requester_id: string;
-  patient_did: string;
-  emergency_case_id: string;
+  patientHash: string;
+  patientName?: string;
+  dob?: string;
+  requesterName: string;
+  role?: string;
+  emergencyCaseId: string;
+  urgencyLevel?: 'CRITICAL_TRAUMA' | 'URGENT' | 'STANDARD';
   reason: string;
-}): Promise<AccessRequestRecord> {
+  status?: 'PENDING' | 'APPROVED' | 'DENIED';
+  zkToken?: any;
+}): Promise<EmergencyAccessRequest> {
+  if (!pool && isMySqlConfigured) {
+    await initializeMySql();
+  }
+
   const id = `REQ-${Math.floor(1000 + Math.random() * 9000)}`;
   const now = new Date().toISOString();
+  const zkTokenStr = data.zkToken ? JSON.stringify(data.zkToken) : null;
 
-  const request: AccessRequestRecord = {
+  const request: EmergencyAccessRequest = {
     id,
-    requester_id: data.requester_id,
-    patient_did: data.patient_did,
-    emergency_case_id: data.emergency_case_id,
+    patientHash: data.patientHash,
+    patientName: data.patientName || 'Unidentified Patient',
+    dob: data.dob || 'Unknown',
+    requesterName: data.requesterName,
+    role: data.role || 'EMERGENCY_PHYSICIAN',
+    emergencyCaseId: data.emergencyCaseId,
+    urgencyLevel: data.urgencyLevel || 'CRITICAL_TRAUMA',
     reason: data.reason,
-    status: 'PENDING',
-    created_at: now,
+    status: data.status || 'PENDING',
+    createdAt: now,
+    zkToken: data.zkToken,
   };
 
-  const local = loadJson<AccessRequestRecord[]>(ACCESS_REQUESTS_FILE, []);
-  local.unshift(request);
-  saveJson(ACCESS_REQUESTS_FILE, local);
+  console.log(`[ACCESS_REQUEST] create started for case ${request.emergencyCaseId}`);
 
   if (pool) {
     try {
       await pool.query(
-        `INSERT INTO access_requests (id, requester_id, patient_did, emergency_case_id, reason, status, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [request.id, request.requester_id, request.patient_did, request.emergency_case_id, request.reason, request.status, request.created_at]
+        `INSERT INTO access_requests 
+         (id, requester_id, patient_did, patient_name, dob, requester_name, role, emergency_case_id, urgency_level, reason, status, created_at, zk_token)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          request.id,
+          request.requesterName,
+          request.patientHash,
+          request.patientName,
+          request.dob,
+          request.requesterName,
+          request.role,
+          request.emergencyCaseId,
+          request.urgencyLevel,
+          request.reason,
+          request.status,
+          request.createdAt,
+          zkTokenStr,
+        ]
       );
-    } catch {}
+      console.log(`[ACCESS_REQUEST] MySQL insert successful - request ID: ${request.id}`);
+    } catch (err: any) {
+      console.error(`[ACCESS_REQUEST] MySQL insert error for request ID ${request.id}:`, err.message);
+      throw err;
+    }
+  } else {
+    console.warn(`[ACCESS_REQUEST] MySQL pool unavailable, saving to fallback storage. Request ID: ${request.id}`);
   }
+
+  // Backup in disk cache
+  const local = loadJson<EmergencyAccessRequest[]>(ACCESS_REQUESTS_FILE, []);
+  local.unshift(request);
+  saveJson(ACCESS_REQUESTS_FILE, local);
+
   return request;
 }
 
 export async function updateAccessRequestStatusDb(
   id: string,
   status: 'APPROVED' | 'DENIED',
-  durationMinutes = 60
-): Promise<AccessRequestRecord | null> {
-  const now = new Date();
-  const approved_at = status === 'APPROVED' ? now.toISOString() : null;
-  const expires_at = status === 'APPROVED' ? new Date(now.getTime() + durationMinutes * 60000).toISOString() : null;
-
-  const local = loadJson<AccessRequestRecord[]>(ACCESS_REQUESTS_FILE, []);
-  const req = local.find((r) => r.id === id);
-  if (req) {
-    req.status = status;
-    req.approved_at = approved_at;
-    req.expires_at = expires_at;
-    saveJson(ACCESS_REQUESTS_FILE, local);
+  decidedBy = 'Hospital Security & Triage Officer',
+  notes = ''
+): Promise<EmergencyAccessRequest | null> {
+  if (!pool && isMySqlConfigured) {
+    await initializeMySql();
   }
+
+  const now = new Date().toISOString();
+  console.log(`[ACCESS_REQUEST] status update started for request ID: ${id}, status: ${status}`);
 
   if (pool) {
     try {
       await pool.query(
-        `UPDATE access_requests SET status = ?, approved_at = ?, expires_at = ? WHERE id = ?`,
-        [status, approved_at, expires_at, id]
+        `UPDATE access_requests SET status = ?, approved_at = ?, decided_at = ?, decided_by = ?, notes = ? WHERE id = ?`,
+        [status, now, now, decidedBy, notes, id]
       );
-      const [rows]: any = await pool.query('SELECT * FROM access_requests WHERE id = ?', [id]);
-      if (rows && rows.length > 0) return rows[0];
-    } catch {}
+      console.log(`[ACCESS_REQUEST] MySQL update successful for request ID: ${id}`);
+    } catch (err: any) {
+      console.error(`[ACCESS_REQUEST] MySQL update error for request ID ${id}:`, err.message);
+      throw err;
+    }
   }
-  return req || null;
+
+  // Also update local cache
+  const local = loadJson<EmergencyAccessRequest[]>(ACCESS_REQUESTS_FILE, []);
+  const req = local.find((r) => r.id === id);
+  if (req) {
+    req.status = status;
+    req.decidedAt = now;
+    req.decidedBy = decidedBy;
+    if (notes) req.notes = notes;
+    saveJson(ACCESS_REQUESTS_FILE, local);
+  }
+
+  return getAccessRequestByIdDb(id);
 }
 
-export async function getAllAccessRequestsDb(): Promise<AccessRequestRecord[]> {
+export async function getAccessRequestByIdDb(id: string): Promise<EmergencyAccessRequest | null> {
+  if (!pool && isMySqlConfigured) {
+    await initializeMySql();
+  }
+
+  if (pool) {
+    try {
+      const [rows]: any = await pool.query('SELECT * FROM access_requests WHERE id = ?', [id]);
+      if (rows && rows.length > 0) {
+        const r = rows[0];
+        return {
+          id: r.id,
+          patientHash: r.patient_did || r.patient_hash || '',
+          patientName: r.patient_name || 'Unidentified Patient',
+          dob: r.dob || '',
+          requesterName: r.requester_name || r.requester_id || '',
+          role: r.role || 'EMERGENCY_PHYSICIAN',
+          emergencyCaseId: r.emergency_case_id || '',
+          urgencyLevel: (r.urgency_level as any) || 'CRITICAL_TRAUMA',
+          reason: r.reason || '',
+          status: r.status || 'PENDING',
+          createdAt: r.created_at ? new Date(r.created_at).toISOString() : new Date().toISOString(),
+          decidedAt: r.decided_at || r.approved_at || undefined,
+          decidedBy: r.decided_by || undefined,
+          notes: r.notes || undefined,
+          zkToken: r.zk_token ? (typeof r.zk_token === 'string' ? JSON.parse(r.zk_token) : r.zk_token) : undefined,
+        };
+      }
+    } catch (err: any) {
+      console.error(`[ACCESS_REQUEST] MySQL query by ID error for ${id}:`, err.message);
+    }
+  }
+
+  const local = loadJson<EmergencyAccessRequest[]>(ACCESS_REQUESTS_FILE, []);
+  return local.find((r) => r.id === id) || null;
+}
+
+export async function getAllAccessRequestsDb(): Promise<EmergencyAccessRequest[]> {
+  if (!pool && isMySqlConfigured) {
+    await initializeMySql();
+  }
+
   if (pool) {
     try {
       const [rows]: any = await pool.query('SELECT * FROM access_requests ORDER BY created_at DESC');
-      if (rows && rows.length > 0) return rows;
-    } catch {}
+      if (rows && rows.length > 0) {
+        return rows.map((r: any) => ({
+          id: r.id,
+          patientHash: r.patient_did || r.patient_hash || '',
+          patientName: r.patient_name || 'Unidentified Patient',
+          dob: r.dob || '',
+          requesterName: r.requester_name || r.requester_id || '',
+          role: r.role || 'EMERGENCY_PHYSICIAN',
+          emergencyCaseId: r.emergency_case_id || '',
+          urgencyLevel: (r.urgency_level as any) || 'CRITICAL_TRAUMA',
+          reason: r.reason || '',
+          status: r.status || 'PENDING',
+          createdAt: r.created_at ? new Date(r.created_at).toISOString() : new Date().toISOString(),
+          decidedAt: r.decided_at || r.approved_at || undefined,
+          decidedBy: r.decided_by || undefined,
+          notes: r.notes || undefined,
+          zkToken: r.zk_token ? (typeof r.zk_token === 'string' ? JSON.parse(r.zk_token) : r.zk_token) : undefined,
+        }));
+      }
+    } catch (err: any) {
+      console.error('[ACCESS_REQUEST] MySQL query all requests error:', err.message);
+    }
   }
-  return loadJson<AccessRequestRecord[]>(ACCESS_REQUESTS_FILE, []);
+
+  const local = loadJson<EmergencyAccessRequest[]>(ACCESS_REQUESTS_FILE, []);
+  return local;
 }
 
 // -------------------------------------------------------------

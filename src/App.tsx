@@ -33,7 +33,6 @@ import { RegisterPage } from './components/RegisterPage.js';
 import { Sidebar, PortalTab } from './components/Sidebar.js';
 import { TopBar } from './components/TopBar.js';
 import { OverviewDashboard } from './components/OverviewDashboard.js';
-import { SendEmergencyRequest } from './components/SendEmergencyRequest.js';
 import { PatientIdentification } from './components/PatientIdentification.js';
 import { MeshSyncPanel } from './components/MeshSyncPanel.js';
 import { ZkProofInspector } from './components/ZkProofInspector.js';
@@ -77,7 +76,6 @@ export default function App() {
       const tab = params.get('tab');
       if (
         tab === 'overview' ||
-        tab === 'send-request' ||
         tab === 'emergency-requests' ||
         tab === 'patients' ||
         tab === 'audit-log' ||
@@ -87,7 +85,7 @@ export default function App() {
         return tab as PortalTab;
       }
       if (params.get('view') === 'approver') return 'emergency-requests';
-      if (params.get('view') === 'requester') return 'send-request';
+      if (params.get('view') === 'requester') return 'patients';
     }
     return 'overview';
   });
@@ -145,7 +143,7 @@ export default function App() {
         setCurrentPage(p as AppPage);
       }
       const tab = params.get('tab');
-      if (tab && ['overview', 'send-request', 'emergency-requests', 'patients', 'audit-log', 'hospital-network', 'settings'].includes(tab)) {
+      if (tab && ['overview', 'emergency-requests', 'patients', 'audit-log', 'hospital-network', 'settings'].includes(tab)) {
         setPortalTab(tab as PortalTab);
       }
     };
@@ -296,8 +294,9 @@ export default function App() {
         setCurrentZkToken(zkData.token);
       }
 
-      // 4. Fetch audit logs
+      // 4. Fetch audit logs & access requests from Railway MySQL
       fetchAuditLogs();
+      fetchAccessRequests();
     } catch (e) {
       console.warn('Initial data load notice:', e);
     }
@@ -906,33 +905,6 @@ export default function App() {
             />
           )}
 
-          {/* TAB 2: GIVE REQUEST / SEND EMERGENCY ACCESS REQUEST */}
-          {portalTab === 'send-request' && (
-            <SendEmergencyRequest
-              patients={patients}
-              selectedPatient={selectedPatient}
-              onSelectPatient={(p) => {
-                setSelectedPatient(p);
-                setCurrentSummary(null);
-                setActiveRequest(null);
-                setErrorMessage(null);
-              }}
-              activeRequest={activeRequest}
-              currentSummary={currentSummary}
-              currentZkToken={currentZkToken}
-              isBroadcasting={isBroadcasting}
-              isLoading={isLoading}
-              loadingStep={loadingStep}
-              isOffline={isOffline}
-              onSendRequest={handleBroadcastAccessRequest}
-              onDirectBypass={handleExecuteQuery}
-              onResetRequest={() => {
-                setActiveRequest(null);
-                setCurrentSummary(null);
-              }}
-              onInspectRaw={() => updatePortalTab('hospital-network')}
-            />
-          )}
 
           {/* TAB 3: PATIENTS / IDENTIFICATION (Field Paramedic Terminal) */}
           {portalTab === 'patients' && (

@@ -16,18 +16,18 @@ import {
   registerCustomPatient,
 } from './mockHospitals.js';
 import {
-  createAccessRequest,
-  getAccessRequestById,
-  getAccessRequests,
   getAutoApprovePolicy,
   setAutoApprovePolicy,
-  updateAccessRequestStatus,
 } from './accessStore.js';
 import {
   initializeMySql,
   getMySqlStatus,
   registerHospital,
   authenticateHospital,
+  createAccessRequestDb,
+  getAccessRequestByIdDb,
+  getAllAccessRequestsDb,
+  updateAccessRequestStatusDb,
   getLocalHospitals,
 } from './mysqlClient.js';
 import { HospitalQueryRequest } from './types.js';
@@ -426,77 +426,110 @@ export function createExpressApp() {
   // --------------------------------------------------------------
   // 8. Emergency Access Requests & Clearance Gate
   // --------------------------------------------------------------
-  app.get('/api/access-requests', (_req: Request, res: Response) => {
-    res.json({
-      requests: getAccessRequests(),
-      autoApprovePolicy: getAutoApprovePolicy(),
-    });
+  app.get('/api/access-requests', async (_req: Request, res: Response) => {
+    try {
+      const requests = await getAllAccessRequestsDb();
+      res.json({
+        requests,
+        autoApprovePolicy: getAutoApprovePolicy(),
+      });
+    } catch (err: any) {
+      console.error('[ACCESS_REQUEST] Error fetching access requests from DB:', err.message);
+      res.status(500).json({ error: 'Failed to fetch access requests from database' });
+    }
   });
 
-  app.post('/api/access-requests', (req: Request, res: Response) => {
-    const {
-      patientHash,
-      patientName,
-      dob,
-      requesterName,
-      role,
-      emergencyCaseId,
-      urgencyLevel,
-      reason,
-      zkToken,
-    } = req.body || {};
+  app.post('/api/access-requests', async (req: Request, res: Response) => {
+    try {
+      const {
+        patientHash,
+        patientName,
+        dob,
+        requesterName,
+        role,
+        emergencyCaseId,
+        urgencyLevel,
+        reason,
+        zkToken,
+      } = req.body || {};
 
-    if (!patientHash || !requesterName) {
-      return res.status(400).json({ error: 'patientHash and requesterName are required' });
+      if (!patientHash || !requesterName) {
+        return res.status(400).json({ error: 'patientHash and requesterName are required' });
+      }
+
+      console.log('[ACCESS_REQUEST] create started');
+      const created = await createAccessRequestDb({
+        patientHash,
+        patientName: patientName || 'Unidentified Patient',
+        dob: dob || 'Unknown',
+        requesterName,
+        role: role || 'EMERGENCY_PHYSICIAN',
+        emergencyCaseId: emergencyCaseId || 'EMS-EMERGENCY',
+        urgencyLevel: urgencyLevel || 'CRITICAL_TRAUMA',
+        reason: reason || 'Point-of-care emergency break-glass triage',
+        zkToken: zkToken || createZkRoleToken(requesterName, role, emergencyCaseId),
+      });
+
+      console.log(`[ACCESS_REQUEST] MySQL insert successful - request ID: ${created.id}`);
+      res.status(201).json(created);
+    } catch (err: any) {
+      console.error('[ACCESS_REQUEST] Error creating access request:', err.message);
+      res.status(500).json({ error: 'Failed to create access request in database' });
     }
-
-    const created = createAccessRequest({
-      patientHash,
-      patientName: patientName || 'Unidentified Patient',
-      dob: dob || 'Unknown',
-      requesterName,
-      role: role || 'EMERGENCY_PHYSICIAN',
-      emergencyCaseId: emergencyCaseId || 'EMS-EMERGENCY',
-      urgencyLevel: urgencyLevel || 'CRITICAL_TRAUMA',
-      reason: reason || 'Point-of-care emergency break-glass triage',
-      zkToken: zkToken || createZkRoleToken(requesterName, role, emergencyCaseId),
-    });
-
-    res.status(201).json(created);
   });
 
-  app.get('/api/access-requests/:id', (req: Request, res: Response) => {
-    const request = getAccessRequestById(req.params.id);
-    if (!request) {
-      return res.status(404).json({ error: 'Request not found' });
+  app.get('/api/access-requests/:id', async (req: Request, res: Response) => {
+    try {
+      const request = await getAccessRequestByIdDb(req.params.id);
+      if (!request) {
+        return res.status(404).json({ error: 'Request not found' });
+      }
+      res.json(request);
+    } catch (err: any) {
+      res.status(500).json({ error: 'Failed to fetch access request' });
     }
-    res.json(request);
   });
 
-  app.post('/api/access-requests/:id/approve', (req: Request, res: Response) => {
-    const { decidedBy } = req.body || {};
-    const updated = updateAccessRequestStatus(
-      req.params.id,
-      'APPROVED',
-      decidedBy || 'Hospital Security & Triage Officer'
-    );
-    if (!updated) {
-      return res.status(404).json({ error: 'Request not found' });
+  app.post('/api/access-requests/:id/approve', async (req: Request, res: Response) => {
+    try {
+      const { decidedBy, notes } = req.body || {};
+      console.log(`[ACCESS_REQUEST] approval started for request ID: ${req.params.id}`);
+      const updated = await updateAccessRequestStatusDb(
+        req.params.id,
+        'APPROVED',
+        decidedBy || 'Hospital Security & Triage Officer',
+        notes || ''
+      );
+      if (!updated) {
+        return res.status(404).json({ error: 'Request not found' });
+      }
+      console.log(`[ACCESS_REQUEST] MySQL update successful for request ID: ${req.params.id}`);
+      res.json(updated);
+    } catch (err: any) {
+      console.error('[ACCESS_REQUEST] Error approving access request:', err.message);
+      res.status(500).json({ error: 'Failed to approve access request' });
     }
-    res.json(updated);
   });
 
-  app.post('/api/access-requests/:id/deny', (req: Request, res: Response) => {
-    const { decidedBy } = req.body || {};
-    const updated = updateAccessRequestStatus(
-      req.params.id,
-      'DENIED',
-      decidedBy || 'Hospital Security & Triage Officer'
-    );
-    if (!updated) {
-      return res.status(404).json({ error: 'Request not found' });
+  app.post('/api/access-requests/:id/deny', async (req: Request, res: Response) => {
+    try {
+      const { decidedBy, notes } = req.body || {};
+      console.log(`[ACCESS_REQUEST] denial started for request ID: ${req.params.id}`);
+      const updated = await updateAccessRequestStatusDb(
+        req.params.id,
+        'DENIED',
+        decidedBy || 'Hospital Security & Triage Officer',
+        notes || ''
+      );
+      if (!updated) {
+        return res.status(404).json({ error: 'Request not found' });
+      }
+      console.log(`[ACCESS_REQUEST] MySQL update successful for request ID: ${req.params.id}`);
+      res.json(updated);
+    } catch (err: any) {
+      console.error('[ACCESS_REQUEST] Error denying access request:', err.message);
+      res.status(500).json({ error: 'Failed to deny access request' });
     }
-    res.json(updated);
   });
 
   app.post('/api/access-policy', (req: Request, res: Response) => {

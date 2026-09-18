@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "REQ-7254",
+    "patientHash": "adc3961bae7c654ee37aa2d6aa66f7b7ef",
+    "patientName": "Dhanu",
+    "dob": "1988-04-12",
+    "requesterName": "Dr. Nikesh Nath, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-RAILWAY-TEST-1359",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Live Railway MySQL integration verification test",
+    "status": "APPROVED",
+    "createdAt": "2026-09-18T20:48:08.464Z",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-RAILWAY-TEST-1359",
+        "responderName": "Dr. Nikesh Nath, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789764488,
+        "expiresAt": 1789778888
+      },
+      "proofCommitment": "bb225923e6054a3b28ba6117cd77dd0ffdb20c01d45dcf52ecf2bd272b61c5d3",
+      "signature": "64006af4cd0784d8d132196523775bb758f32d087cceac96dc9074a99222bcd0",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "decidedAt": "2026-09-18T20:48:10.675Z",
+    "decidedBy": "Dr. Roshan (Pacific Valley)"
+  }
+]
