@@ -16,9 +16,9 @@ const defaultRequests: EmergencyAccessRequest[] = [
   {
     id: 'REQ-901',
     patientHash: '3a7b98d2f14c8e561a09d3b4e72a8c1f90e5b2a3c7d6e4f1890b2c3d4e5f6a7b',
-    patientName: 'Elena Rostova',
+    patientName: 'Santhosh',
     dob: '1979-11-23',
-    requesterName: 'Dr. Jordan Hayes, MD',
+    requesterName: 'Dr. Nikesh Nath, MD',
     role: 'TRAUMA_SURGEON_ATTENDING',
     emergencyCaseId: 'EMS-TRAUMA-9912',
     urgencyLevel: 'CRITICAL_TRAUMA',

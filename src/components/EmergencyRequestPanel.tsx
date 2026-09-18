@@ -91,7 +91,7 @@ export const EmergencyRequestPanel: React.FC<EmergencyRequestPanelProps> = ({
             <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-200">
               <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider block">Verified Responder</span>
               <span className="text-slate-900 font-bold block mt-1 text-sm">
-                {currentZkToken?.publicSignals.responderName || 'Dr. Jordan Hayes, MD'}
+                {currentZkToken?.publicSignals.responderName || 'Dr. Nikesh Nath, MD'}
               </span>
               <span className="text-[11px] text-blue-600 font-semibold mt-0.5 inline-block">
                 {currentZkToken?.publicSignals.role || 'TRAUMA_SURGEON_ATTENDING'}

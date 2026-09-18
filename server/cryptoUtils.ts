@@ -29,7 +29,7 @@ export function hashBiometricToDid(fullName: string, dob: string): string {
  *      to third-party hospital databases.
  */
 export function createZkRoleToken(
-  responderName: string = 'Dr. Jordan Hayes, MD',
+  responderName: string = 'Dr. Nikesh Nath, MD',
   role: string = 'TRAUMA_SURGEON_ATTENDING',
   emergencyCaseId: string = 'EMS-TRAUMA-9912'
 ): ZkRoleToken {

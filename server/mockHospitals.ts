@@ -36,7 +36,7 @@ export interface DemoPatientItem {
 export const DEMO_PATIENTS: DemoPatientItem[] = [
   {
     id: 'alex-mercer',
-    name: 'Alex Mercer',
+    name: 'Dhanu',
     dob: '1988-04-12',
     notes: 'Mass-casualty prime demo — conflicting penicillin allergy & active anticoagulant record',
     hash: hashBiometricToDid('Alex Mercer', '1988-04-12'),
@@ -52,9 +52,9 @@ export const DEMO_PATIENTS: DemoPatientItem[] = [
   },
   {
     id: 'elena-rostova',
-    name: 'Elena Rostova',
+    name: 'Santhosh',
     dob: '1995-08-23',
-    notes: 'Pediatric & trauma profile — rare AB- blood, severe latex/sulfa allergy, DNR registered',
+    notes: 'Trauma profile — rare AB- blood, severe latex/sulfa allergy, DNR registered',
     hash: hashBiometricToDid('Elena Rostova', '1995-08-23'),
     triageLevel: 'EMERGENCY TRAUMA BAY 1',
     clinicalProfile: {
@@ -68,7 +68,7 @@ export const DEMO_PATIENTS: DemoPatientItem[] = [
   },
   {
     id: 'marcus-vance',
-    name: 'Marcus Vance',
+    name: 'Samual',
     dob: '1972-11-30',
     notes: 'Senior diabetic emergency — Eliquis blood thinner, CAD, pacemaker & titanium hip implant',
     hash: hashBiometricToDid('Marcus Vance', '1972-11-30'),

@@ -286,7 +286,7 @@ export default function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          responderName: 'Dr. Jordan Hayes, MD',
+          responderName: 'Dr. Nikesh Nath, MD',
           role: 'TRAUMA_SURGEON_ATTENDING',
           caseId: 'EMS-TRAUMA-9912',
         }),
@@ -397,7 +397,7 @@ export default function App() {
     const requesterName =
       customParams?.requesterName ||
       currentZkToken?.publicSignals.responderName ||
-      'Dr. Jordan Hayes, MD';
+      'Dr. Nikesh Nath, MD';
     const role =
       customParams?.role ||
       currentZkToken?.publicSignals.role ||
@@ -774,7 +774,7 @@ export default function App() {
           extractedRecords: fallbackExtractedRecords,
           zkVerification: {
             valid: true,
-            requesterSubject: currentZkToken?.publicSignals.responderName || 'Dr. Jordan Hayes, MD',
+            requesterSubject: currentZkToken?.publicSignals.responderName || 'Dr. Nikesh Nath, MD',
             caseId: currentZkToken?.publicSignals.emergencyCaseId || 'EMS-TRAUMA-9912',
           },
           auditLogEntryHash: '0x' + Math.random().toString(16).substring(2, 14),

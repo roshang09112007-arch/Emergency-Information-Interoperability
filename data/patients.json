@@ -1,7 +1,7 @@
 [
   {
     "id": "alex-mercer",
-    "name": "Alex Mercer",
+    "name": "Dhanu",
     "dob": "1988-04-12",
     "notes": "Mass-casualty prime demo — conflicting penicillin allergy & active anticoagulant record",
     "hash": "adc3961bae7c654ee37aa2d6aa66f7b7ef7ca88fbaef2293a2fe3018d7cddf47",
@@ -17,9 +17,9 @@
   },
   {
     "id": "elena-rostova",
-    "name": "Elena Rostova",
+    "name": "Santhosh",
     "dob": "1995-08-23",
-    "notes": "Pediatric & trauma profile — rare AB- blood, severe latex/sulfa allergy, DNR registered",
+    "notes": "Trauma profile — rare AB- blood, severe latex/sulfa allergy, DNR registered",
     "hash": "0861f45a956b6b88f0484dc6ad87e4c1519fefc982ced791a6b83f1815cee589",
     "triageLevel": "EMERGENCY TRAUMA BAY 1",
     "clinicalProfile": {
@@ -33,7 +33,7 @@
   },
   {
     "id": "marcus-vance",
-    "name": "Marcus Vance",
+    "name": "Samual",
     "dob": "1972-11-30",
     "notes": "Senior diabetic emergency — Eliquis blood thinner, CAD, pacemaker & titanium hip implant",
     "hash": "cace6d47c95bfc31253da88f34c5cfcadd4bc76648c01b0648146b68647e7534",
@@ -48,18 +48,34 @@
     }
   },
   {
-    "id": "custom-1789758183479",
-    "name": "roshab",
-    "dob": "1985-06-14",
-    "notes": "Registered via physical REAL_OPTICAL_CAMERA_FRAME sensor. Cryptographic hardware hash verified.",
-    "hash": "8a3077effebd4de22c7933fe58be6fd10822f9226103240c0be4e5062dc0f0ed",
-    "triageLevel": "CRITICAL RESUSCITATION",
+    "id": "sakthi-demo",
+    "name": "Sakthi",
+    "dob": "1990-03-07",
+    "notes": "Cardiac arrest response — B+ blood, Aspirin allergy, active Xarelto therapy",
+    "hash": "7d2a14f83b5c9e410d83c2f1a0b9e5d84c2f3a1b0e9d5c84b3f2a1e0d9c5b4a3",
+    "triageLevel": "CODE RED PRIORITY",
     "clinicalProfile": {
-      "bloodType": "O Positive (Rh+)",
-      "allergy": "Penicillin G (Severe Anaphylaxis)",
-      "anticoagulant": "Warfarin Sodium 5mg Daily",
-      "condition": "Chronic Atrial Fibrillation",
-      "implant": "Dual-Chamber Cardiac Pacemaker",
+      "bloodType": "B Positive (Rh+)",
+      "allergy": "Aspirin / NSAIDs (Allergic Bronchospasm)",
+      "anticoagulant": "Xarelto (Rivaroxaban) 20mg Daily",
+      "condition": "Hypertensive Heart Disease",
+      "implant": "None documented",
+      "dnrStatus": "FULL_CODE"
+    }
+  },
+  {
+    "id": "shiva-demo",
+    "name": "Shiva",
+    "dob": "1983-08-19",
+    "notes": "Polytrauma RTA — A- blood, sulfa allergy, active anticoagulation, head injury GCS 8",
+    "hash": "3c1e89f24a7d6b05e2f90a183d4c7e260b59d3a2c8f10e94b5a72d1c3f08e927",
+    "triageLevel": "Level 1 - Resuscitation (Critical)",
+    "clinicalProfile": {
+      "bloodType": "A Negative (Rh-)",
+      "allergy": "Sulfonamides (Anaphylaxis)",
+      "anticoagulant": "Heparin IV infusion (active)",
+      "condition": "Traumatic Brain Injury / Polytrauma",
+      "implant": "None documented",
       "dnrStatus": "FULL_CODE"
     }
   },

@@ -73,7 +73,7 @@ export const SendEmergencyRequest: React.FC<SendEmergencyRequestProps> = ({
   const activeSelectedPatient = selectedPatient || displayPatients[0];
 
   const [caseId, setCaseId] = useState('EMS-TRAUMA-9912');
-  const [requesterName, setRequesterName] = useState('Dr. Jordan Hayes, MD');
+  const [requesterName, setRequesterName] = useState('Dr. Nikesh Nath, MD');
   const [role, setRole] = useState('TRAUMA_SURGEON_ATTENDING');
   const [urgencyLevel, setUrgencyLevel] = useState<'CRITICAL_TRAUMA' | 'URGENT' | 'STANDARD'>('CRITICAL_TRAUMA');
   const [reason, setReason] = useState(

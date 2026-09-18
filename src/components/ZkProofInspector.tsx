@@ -22,7 +22,7 @@ export const ZkProofInspector: React.FC<ZkProofInspectorProps> = ({
   currentZkToken,
   onRefreshZkToken,
 }) => {
-  const [responderName, setResponderName] = useState('Dr. Jordan Hayes, MD');
+  const [responderName, setResponderName] = useState('Dr. Nikesh Nath, MD');
   const [role, setRole] = useState('TRAUMA_SURGEON_ATTENDING');
   const [caseId, setCaseId] = useState('EMS-TRAUMA-9912');
   const [isSimulatingExpired, setIsSimulatingExpired] = useState(false);

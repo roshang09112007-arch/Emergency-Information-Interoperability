@@ -157,7 +157,7 @@ const INITIAL_HOSPITALS: HospitalRecord[] = [
     password_hash: bcrypt.hashSync('PulseKey#2026', 10),
     license_id: 'CMS-CA-948102',
     status: 'ACTIVE',
-    admin_name: 'Dr. Sarah Lin, MD',
+    admin_name: 'Dr. Nikesh Nath, MD',
     created_at: '2026-01-01T00:00:00Z',
   },
   {
@@ -168,7 +168,7 @@ const INITIAL_HOSPITALS: HospitalRecord[] = [
     password_hash: bcrypt.hashSync('PulseKey#2026', 10),
     license_id: 'CMS-TN-810492',
     status: 'ACTIVE',
-    admin_name: 'Marcus Vance, RN BSN',
+    admin_name: 'Nithish, RN BSN',
     created_at: '2026-01-01T00:00:00Z',
   },
   {
@@ -179,7 +179,7 @@ const INITIAL_HOSPITALS: HospitalRecord[] = [
     password_hash: bcrypt.hashSync('PulseKey#2026', 10),
     license_id: 'CMS-WA-109284',
     status: 'ACTIVE',
-    admin_name: 'Dr. Elena Rostova, MD',
+    admin_name: 'Dr. Roshan, MD',
     created_at: '2026-01-01T00:00:00Z',
   },
 ];
@@ -188,7 +188,7 @@ const INITIAL_USERS: UserRecord[] = [
   {
     id: 'user_metro_admin_01',
     hospital_id: 'HOSP-METRO-01',
-    name: 'Dr. Sarah Lin, MD',
+    name: 'Dr. Nikesh Nath, MD',
     email: 'triage@metrogeneral.org',
     password_hash: bcrypt.hashSync('PulseKey#2026', 10),
     role: 'CHIEF_TRIAGE_OFFICER',
@@ -197,7 +197,7 @@ const INITIAL_USERS: UserRecord[] = [
   {
     id: 'user_stjude_admin_02',
     hospital_id: 'HOSP-STJUDE-02',
-    name: 'Marcus Vance, RN BSN',
+    name: 'Nithish, RN BSN',
     email: 'trauma@stjude-health.org',
     password_hash: bcrypt.hashSync('PulseKey#2026', 10),
     role: 'ER_CHARGE_NURSE',
@@ -206,7 +206,7 @@ const INITIAL_USERS: UserRecord[] = [
   {
     id: 'user_pacific_admin_03',
     hospital_id: 'HOSP-PACIFIC-03',
-    name: 'Dr. Elena Rostova, MD',
+    name: 'Dr. Roshan, MD',
     email: 'er-access@pacificvalley.med',
     password_hash: bcrypt.hashSync('PulseKey#2026', 10),
     role: 'EMERGENCY_DIRECTOR',
