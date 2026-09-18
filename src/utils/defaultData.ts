@@ -1,0 +1,68 @@
+import { DemoPatient } from '../types.js';
+
+export const DEFAULT_PATIENTS: DemoPatient[] = [
+  {
+    id: 'sarah-connor',
+    name: 'Sarah Connor',
+    dob: '1985-06-14',
+    notes: 'High-speed motor vehicle trauma with suspected acute hemorrhage. Unconscious, GCS 6.',
+    hash: 'cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9',
+    triageLevel: 'Level 1 - Resuscitation (Critical)',
+    clinicalProfile: {
+      bloodType: 'O Positive (Rh+)',
+      allergy: 'Penicillin G (Severe Anaphylaxis)',
+      anticoagulant: 'Warfarin Sodium 5mg Daily',
+      condition: 'Chronic Atrial Fibrillation',
+      implant: 'Dual-Chamber Cardiac Pacemaker',
+      dnrStatus: 'FULL_CODE',
+    },
+  },
+  {
+    id: 'alex-mercer',
+    name: 'Alex Mercer',
+    dob: '1988-04-12',
+    notes: 'Mass-casualty prime demo — conflicting penicillin allergy & active anticoagulant record',
+    hash: 'adc3961bae7c654ee37aa2d6aa66f7b7ef7ca88fbaef2293a2fe3018d7cddf47',
+    triageLevel: 'CRITICAL RESUSCITATION',
+    clinicalProfile: {
+      bloodType: 'O Positive (Rh+)',
+      allergy: 'Penicillin G / Beta-Lactams (Severe Anaphylaxis)',
+      anticoagulant: 'Warfarin Sodium 5mg Daily',
+      condition: 'Chronic Nonvalvular Atrial Fibrillation',
+      implant: 'St. Jude Accent Dual-Chamber Pacemaker',
+      dnrStatus: 'FULL_CODE',
+    },
+  },
+  {
+    id: 'david-sterling',
+    name: 'David Sterling',
+    dob: '1978-11-23',
+    notes: 'Industrial fall from scaffolding with blunt chest trauma. Rare AB- blood profile.',
+    hash: '0861f45a956b6b88f0484dc6ad87e4c1519fefc982ced791a6b83f1815cee589',
+    triageLevel: 'Level 1 - Resuscitation (Critical)',
+    clinicalProfile: {
+      bloodType: 'AB Negative (Rh-)',
+      allergy: 'Latex & Sulfonamide Antibiotics (Angioedema)',
+      anticoagulant: 'Eliquis (Apixaban) 5mg BID',
+      condition: 'Acute Deep Vein Thrombosis',
+      implant: 'Titanium Hip Arthroplasty',
+      dnrStatus: 'FULL_CODE',
+    },
+  },
+  {
+    id: 'marcus-vance',
+    name: 'Marcus Vance',
+    dob: '1972-11-30',
+    notes: 'Senior diabetic emergency — Eliquis blood thinner, CAD, pacemaker & titanium hip implant',
+    hash: 'cace6d47c95bfc31253da88f34c5cfcadd4bc76648c01b0648146b68647e7534',
+    triageLevel: 'CODE RED PRIORITY',
+    clinicalProfile: {
+      bloodType: 'A Positive (Rh+)',
+      allergy: 'Morphine Sulfate (Severe Respiratory Depression)',
+      anticoagulant: 'Eliquis (Apixaban) 5mg BID',
+      condition: 'Coronary Artery Disease & Type 2 Diabetes',
+      implant: 'Total Left Hip Titanium Arthroplasty',
+      dnrStatus: 'FULL_CODE',
+    },
+  },
+];

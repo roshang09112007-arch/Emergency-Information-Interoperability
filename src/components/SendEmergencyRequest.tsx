@@ -25,6 +25,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { DemoPatient, EmergencyAccessRequest, GoldenSummary, ZkRoleToken } from '../types.js';
+import { DEFAULT_PATIENTS } from '../utils/defaultData.js';
 import { GoldenSummaryCard } from './GoldenSummaryCard.js';
 
 interface SendEmergencyRequestProps {
@@ -68,6 +69,9 @@ export const SendEmergencyRequest: React.FC<SendEmergencyRequestProps> = ({
   onResetRequest,
   onInspectRaw,
 }) => {
+  const displayPatients = patients && patients.length > 0 ? patients : DEFAULT_PATIENTS;
+  const activeSelectedPatient = selectedPatient || displayPatients[0];
+
   const [caseId, setCaseId] = useState('EMS-TRAUMA-9912');
   const [requesterName, setRequesterName] = useState('Dr. Jordan Hayes, MD');
   const [role, setRole] = useState('TRAUMA_SURGEON_ATTENDING');
@@ -119,7 +123,7 @@ export const SendEmergencyRequest: React.FC<SendEmergencyRequestProps> = ({
   };
 
   const handleDispatch = async () => {
-    let targetPatient = selectedPatient;
+    let targetPatient = activeSelectedPatient;
     if (customPatientMode && customName) {
       targetPatient = {
         id: `custom-${Date.now()}`,
@@ -131,12 +135,8 @@ export const SendEmergencyRequest: React.FC<SendEmergencyRequestProps> = ({
     }
 
     if (!targetPatient) {
-      if (patients.length > 0) {
-        targetPatient = patients[0];
-        onSelectPatient(patients[0]);
-      } else {
-        return;
-      }
+      targetPatient = displayPatients[0];
+      onSelectPatient(displayPatients[0]);
     }
 
     await onSendRequest({
@@ -331,8 +331,8 @@ export const SendEmergencyRequest: React.FC<SendEmergencyRequestProps> = ({
 
               {!customPatientMode ? (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {patients.map((p) => {
-                    const isSelected = selectedPatient?.id === p.id;
+                  {displayPatients.map((p) => {
+                    const isSelected = activeSelectedPatient.id === p.id || selectedPatient?.id === p.id;
                     return (
                       <div
                         key={p.id}
