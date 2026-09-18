@@ -1,0 +1,35 @@
+[
+  {
+    "id": "HOSP-METRO-01",
+    "hospital_id": "HOSP-METRO-01",
+    "hospital_name": "Metro General Hospital",
+    "email": "triage@metrogeneral.org",
+    "password_hash": "$2b$10$B0AbebbCM2QGhIc76Q/iJe1lh04zYzZ/DmiXfrpe0Fss2.DMVVc8m",
+    "license_id": "CMS-CA-948102",
+    "status": "ACTIVE",
+    "admin_name": "Dr. Sarah Lin, MD",
+    "created_at": "2026-01-01T00:00:00Z"
+  },
+  {
+    "id": "HOSP-STJUDE-02",
+    "hospital_id": "HOSP-STJUDE-02",
+    "hospital_name": "St. Jude Regional Medical Center",
+    "email": "trauma@stjude-health.org",
+    "password_hash": "$2b$10$cxDZfXLvxQb2Ft0YkYwpuuHjVknD58EpyrMCJAutex5Hq1uD8/IKS",
+    "license_id": "CMS-TN-810492",
+    "status": "ACTIVE",
+    "admin_name": "Marcus Vance, RN BSN",
+    "created_at": "2026-01-01T00:00:00Z"
+  },
+  {
+    "id": "HOSP-PACIFIC-03",
+    "hospital_id": "HOSP-PACIFIC-03",
+    "hospital_name": "Pacific Valley Health System",
+    "email": "er-access@pacificvalley.med",
+    "password_hash": "$2b$10$H5EtaApTze.wh9Io6VWa9.6c8kIl3fk2MUxizWGKAZ8Mqu1tGHQre",
+    "license_id": "CMS-WA-109284",
+    "status": "ACTIVE",
+    "admin_name": "Dr. Elena Rostova, MD",
+    "created_at": "2026-01-01T00:00:00Z"
+  }
+]

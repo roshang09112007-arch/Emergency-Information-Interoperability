@@ -1,0 +1,306 @@
+[
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "STANDARD",
+    "reason": "Unconscious trauma intake, multi-system trauma. Immediate requirement for blood type, lethal allergies, and active anticoagulants.",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789758073,
+        "expiresAt": 1789772473
+      },
+      "proofCommitment": "9318294da879a4968efe26477e578f9f0b86495ff786d1d52cd54cab7876d83e",
+      "signature": "998ad7a4df810a04de808c94278a4aa6c0b55c69d0b82cbed755d7350033cec3",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-4385",
+    "createdAt": "2026-09-18T19:01:32.542Z",
+    "status": "PENDING"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Polytrauma road accident - urgent query to hospital EHR network",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789758054,
+        "expiresAt": 1789772454
+      },
+      "proofCommitment": "698d7ae45b82d5a86ddad00e169c523a0c5e91020a8e6c8b715aa056cc65376d",
+      "signature": "b4f7bfaeee92e11f876d4d9e6d59ad85ba69f3ae8a232447283527fa5fba2fc7",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-7401",
+    "createdAt": "2026-09-18T19:00:54.236Z",
+    "status": "APPROVED",
+    "decidedAt": "2026-09-18T19:01:05.093Z",
+    "decidedBy": "Dr. Arun Kumar (Metro General Hospital)"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Sarah Connor, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789757219,
+        "expiresAt": 1789771619
+      },
+      "proofCommitment": "7d42371ba73e5b3705b46a907e2c51dc276caade2b54c34643fd959763513dbf",
+      "signature": "bafe700afcdf9761aafaac8fa742f75f3695937c720351ceeef9006529b71c18",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-2122",
+    "createdAt": "2026-09-18T18:47:00.341Z",
+    "status": "PENDING"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Sarah Connor, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789757218,
+        "expiresAt": 1789771618
+      },
+      "proofCommitment": "b097212b29fbc46cdea58826863177b6a51a40d913259bd5513251d7ac29129a",
+      "signature": "0f91c40ede3fad57ca7317ec9e4bebb53560f1a2a805acfc230a0b8666ad109f",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-3867",
+    "createdAt": "2026-09-18T18:46:59.237Z",
+    "status": "PENDING"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Sarah Connor, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789757185,
+        "expiresAt": 1789771585
+      },
+      "proofCommitment": "495009280e24671b25cf6a87b7c054de3f6c66bfd98962d021e101fd9bd9f771",
+      "signature": "b964fd9a143489fa6586bf53f6c2babcc230073e97df08cf92562b980e51d2f1",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-3700",
+    "createdAt": "2026-09-18T18:46:57.909Z",
+    "status": "PENDING"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Sarah Connor, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789757133,
+        "expiresAt": 1789771533
+      },
+      "proofCommitment": "f536cc9000082de0e03e71fc668c9ba17a331cb7158b207c43c12ffa4da3fc6c",
+      "signature": "2a6a7602f36c10bdbcb4f96040cb1c528ef4500f03335da864357efb6b0a471a",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-6460",
+    "createdAt": "2026-09-18T18:45:36.274Z",
+    "status": "APPROVED",
+    "decidedAt": "2026-09-18T18:46:25.171Z",
+    "decidedBy": "Dr. Arun Kumar (Metro General Hospital)"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Sarah Connor, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789757128,
+        "expiresAt": 1789771528
+      },
+      "proofCommitment": "97d75eabfe1dd44d2b0be870bb0d10f074a7ecbe04c026aa854880adba1b3c61",
+      "signature": "1c370c377f07bea210cff3f5798d73971a2f6a30bc51c3cce39ad4f5c5c45f03",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-6884",
+    "createdAt": "2026-09-18T18:45:32.720Z",
+    "status": "PENDING"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Sarah Connor, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789757105,
+        "expiresAt": 1789771505
+      },
+      "proofCommitment": "9f02ad3ed63c80b0e75e6f66c13bcc89ecd3629b91e508f8ee0e0860f4bc0374",
+      "signature": "1a605e3164da17965998e41dda8c8dca191c37d85d8d399afead00f780f31035",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-7720",
+    "createdAt": "2026-09-18T18:45:28.561Z",
+    "status": "PENDING"
+  },
+  {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "patientName": "Sarah Connor",
+    "dob": "1985-06-14",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Sarah Connor, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789757077,
+        "expiresAt": 1789771477
+      },
+      "proofCommitment": "b070501ed170a2a08befafaef6b841ebbe4dc4a16969471aa485ea4ff7f7515e",
+      "signature": "49a5773aa534f1fd8388dcffc021e872444530c176e27e7ac6c44e8af77bedb6",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-8978",
+    "createdAt": "2026-09-18T18:44:52.532Z",
+    "status": "APPROVED",
+    "decidedAt": "2026-09-18T18:45:01.087Z",
+    "decidedBy": "Dr. Arun Kumar (Metro General Hospital)"
+  },
+  {
+    "patientHash": "adc3961bae7c654ee37aa2d6aa66f7b7ef7ca88fbaef2293a2fe3018d7cddf47",
+    "patientName": "Alex Mercer",
+    "dob": "1988-04-12",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious patient Alex Mercer, trauma bay intake, vitals critical",
+    "zkToken": {
+      "tokenType": "SIMULATED_ZK_ROLE_PROOF",
+      "publicSignals": {
+        "role": "TRAUMA_SURGEON_ATTENDING",
+        "credentialId": "MED-LIC-TX-88421",
+        "emergencyCaseId": "EMS-TRAUMA-9912",
+        "responderName": "Dr. Jordan Hayes, MD",
+        "jurisdiction": "METRO_EMS_DISTRICT_4",
+        "issuedAt": 1789754155,
+        "expiresAt": 1789768555
+      },
+      "proofCommitment": "5956f8b7e56f6589d612e40e026208f8d1a4cca9cb32ee3ae71ca0e8a5266715",
+      "signature": "28770a3a57f9788a41b2e3609652b20b8097f05dfcaf5a45e458816fae73a504",
+      "mockCircuitNote": "SIMULATES zero-knowledge proof of role & active dispatch. Production uses Groth16/Semaphore circuit to hide responder PII while proving emergency authority."
+    },
+    "id": "REQ-6638",
+    "createdAt": "2026-09-18T17:56:34.945Z",
+    "status": "APPROVED",
+    "decidedAt": "2026-09-18T18:45:04.820Z",
+    "decidedBy": "Dr. Arun Kumar (Metro General Hospital)"
+  },
+  {
+    "id": "REQ-901",
+    "patientHash": "3a7b98d2f14c8e561a09d3b4e72a8c1f90e5b2a3c7d6e4f1890b2c3d4e5f6a7b",
+    "patientName": "Elena Rostova",
+    "dob": "1979-11-23",
+    "requesterName": "Dr. Jordan Hayes, MD",
+    "role": "TRAUMA_SURGEON_ATTENDING",
+    "emergencyCaseId": "EMS-TRAUMA-9912",
+    "urgencyLevel": "CRITICAL_TRAUMA",
+    "reason": "Unconscious polytrauma victim, vehicular crash, Glasgow Coma Scale 6",
+    "status": "APPROVED",
+    "createdAt": "2026-09-18T16:27:48.774Z",
+    "decidedAt": "2026-09-18T16:28:08.774Z",
+    "decidedBy": "Hospital Security & Triage Officer (Metro General)",
+    "notes": "Emergency Break-Glass approved. Valid ZK credential verified."
+  }
+]

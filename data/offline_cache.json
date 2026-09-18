@@ -1,0 +1,142 @@
+{
+  "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9": {
+    "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+    "cachedAt": "2026-09-18T19:28:13.094Z",
+    "goldenSummary": {
+      "patientHash": "cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9",
+      "reconciledAt": "2026-09-18T19:28:13.094Z",
+      "dataSourceCount": 3,
+      "mode": "ONLINE_FEDERATED",
+      "bloodType": {
+        "value": "O Positive (O+)",
+        "confidence": "HIGH",
+        "reason": "Unanimously verified across all 3 hospital systems with laboratory cross-matching.",
+        "sources": [
+          "Metro General Hospital Trauma Network",
+          "St. Jude Regional Medical Center",
+          "Pacific Valley Health System"
+        ]
+      },
+      "allergies": {
+        "value": "Penicillin G & Beta-Lactams: SEVERE ANAPHYLAXIS",
+        "confidence": "HIGH",
+        "reason": "CONFLICT RESOLVED: Metro General Hospital (2024) confirmed acute anaphylactic shock. This overrides St. Jude’s 2022 intake self-report (\"NKDA\") and clarifies Pacific Valley’s 2019 pediatric rash.",
+        "sources": [
+          "Metro General Hospital Trauma Network",
+          "Pacific Valley Health System"
+        ]
+      },
+      "anticoagulants": {
+        "value": "Warfarin Sodium 5mg Daily (High Bleeding Risk)",
+        "confidence": "HIGH",
+        "reason": "Metro General 2024 active prescription confirms active oral anticoagulation for Atrial Fibrillation. Subsumes 2022 aspirin regimen.",
+        "sources": [
+          "Metro General Hospital Trauma Network"
+        ]
+      },
+      "majorConditions": {
+        "value": "Chronic Nonvalvular Atrial Fibrillation; Hypertension",
+        "confidence": "HIGH",
+        "reason": "Documented across multiple inpatient admissions (2022-2024) with concordant arrhythmia findings.",
+        "sources": [
+          "Metro General Hospital Trauma Network",
+          "St. Jude Regional Medical Center",
+          "Pacific Valley Health System"
+        ]
+      },
+      "implants": {
+        "value": "St. Jude Dual-Chamber Cardiac Pacemaker (MRI Unsafe)",
+        "confidence": "HIGH",
+        "reason": "Confirmed by device registry and chest radiographic telemetry markers. Electrocautery precaution active.",
+        "sources": [
+          "Metro General Hospital Trauma Network",
+          "St. Jude Regional Medical Center"
+        ]
+      },
+      "dnrStatus": {
+        "value": "Full Code (Attempt Resuscitation)",
+        "confidence": "HIGH",
+        "reason": "Current 2024 consent directive on file confirms full resuscitation status.",
+        "sources": [
+          "Metro General Hospital Trauma Network",
+          "Pacific Valley Health System"
+        ]
+      },
+      "clinicalAdvisory": "CRITICAL TRAUMA ALERT: Patient is anticoagulated on Warfarin. Administer Vitamin K/PCC if acute intracranial or cavity hemorrhage is suspected. DO NOT ADMINISTER PENICILLIN OR CEPHALOSPORINS."
+    },
+    "extractedRecords": [
+      {
+        "hospitalId": "hospital-a",
+        "hospitalName": "Metro General Hospital Trauma Network",
+        "format": "FHIR_JSON",
+        "rawRecord": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"metro-gen-fhir-61184\",\n  \"meta\": {\n    \"lastUpdated\": \"2026-09-18T19:08:06.647Z\",\n    \"hospital\": \"Metro General Hospital Trauma Center\"\n  },\n  \"entry\": [\n    {\n      \"resource\": {\n        \"resourceType\": \"Patient\",\n        \"identifier\": [\n          {\n            \"system\": \"urn:pulsekey:did\",\n            \"value\": \"cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9\"\n          }\n        ],\n        \"active\": true\n      }\n    },\n    {\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"category\": \"laboratory\",\n        \"code\": {\n          \"text\": \"ABO and Rh Group Typing\"\n        },\n        \"valueCodeableConcept\": {\n          \"text\": \"O Positive (Rh+)\"\n        },\n        \"status\": \"final\",\n        \"effectiveDateTime\": \"2026-09-18\"\n      }\n    },\n    {\n      \"resource\": {\n        \"resourceType\": \"AllergyIntolerance\",\n        \"clinicalStatus\": \"active\",\n        \"verificationStatus\": \"confirmed\",\n        \"criticality\": \"high\",\n        \"code\": {\n          \"text\": \"Penicillin G (Severe Anaphylaxis)\"\n        },\n        \"reaction\": [\n          {\n            \"severity\": \"severe\",\n            \"manifestation\": [\n              {\n                \"text\": \"Severe acute anaphylaxis, bronchospasm\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"resource\": {\n        \"resourceType\": \"MedicationStatement\",\n        \"status\": \"active\",\n        \"medicationCodeableConcept\": {\n          \"text\": \"Warfarin Sodium 5mg Daily\"\n        },\n        \"dosage\": [\n          {\n            \"text\": \"Active therapeutic dose\"\n          }\n        ],\n        \"note\": \"High alert anticoagulant. Hemorrhage precaution in major trauma.\"\n      }\n    },\n    {\n      \"resource\": {\n        \"resourceType\": \"Condition\",\n        \"clinicalStatus\": \"active\",\n        \"code\": {\n          \"text\": \"Chronic Atrial Fibrillation\"\n        }\n      }\n    },\n    {\n      \"resource\": {\n        \"resourceType\": \"Device\",\n        \"type\": {\n          \"text\": \"Dual-Chamber Cardiac Pacemaker\"\n        },\n        \"status\": \"active\"\n      }\n    },\n    {\n      \"resource\": {\n        \"resourceType\": \"Consent\",\n        \"provision\": {\n          \"type\": \"permit\",\n          \"action\": [\n            {\n              \"text\": \"Full Resuscitation (Full Code)\"\n            }\n          ]\n        }\n      }\n    }\n  ]\n}",
+        "extractedAt": "2026-09-18T19:28:13.093Z",
+        "fields": {
+          "bloodType": "O+",
+          "allergies": [
+            "Penicillin G (Severe Anaphylaxis) (Severe acute anaphylaxis, bronchospasm) [Rec: 2024]"
+          ],
+          "medicationsAnticoagulants": [
+            "Warfarin Sodium 5mg Daily - Active therapeutic dose"
+          ],
+          "majorConditions": [
+            "Chronic Atrial Fibrillation"
+          ],
+          "implants": [
+            "Dual-Chamber Cardiac Pacemaker ()"
+          ],
+          "dnrStatus": "FULL_CODE",
+          "recordDate": "2026-09-18"
+        }
+      },
+      {
+        "hospitalId": "hospital-b",
+        "hospitalName": "St. Jude Regional Medical Center",
+        "format": "PIPE_CSV",
+        "rawRecord": "RECORD_TYPE|ID_HASH|DATA_KEY|VALUE|REC_DATE|STATUS|NOTES\nPATIENT|cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9|IDENTITY|PROTECTED_DID|2026-09-18|ACTIVE|Regional Emergency Trauma Intake\nBLOOD|cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9|TYPE|O Positive+|2026-09-18|CONFIRMED|Lab certified\nALLERGIES|cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9|ALLERGENS|Penicillin G (Severe Anaphylaxis)|2026-09-18|CONFIRMED|Acute reaction history verified\nMEDS|cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9|RX|Warfarin Sodium 5mg Daily|2026-09-18|ACTIVE|Active prescribed anticoagulant\nCONDITIONS|cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9|DX|Chronic Atrial Fibrillation|2026-09-18|ACTIVE|Emergency chart documented\nIMPLANTS|cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9|DEVICE|Dual-Chamber Cardiac Pacemaker|2026-09-18|CONFIRMED|Verified surgical history\nADV_DIRECTIVE|cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9|DNR_STATUS|FULL CODE|2026-09-18|ACTIVE|Verified order",
+        "extractedAt": "2026-09-18T19:28:13.093Z",
+        "fields": {
+          "bloodType": "O Positive+",
+          "allergies": [
+            "Penicillin G (Severe Anaphylaxis) (Acute reaction history verified) [Rec: 2026-09-18]"
+          ],
+          "medicationsAnticoagulants": [
+            "Warfarin Sodium 5mg Daily [Rec: 2026-09-18]"
+          ],
+          "majorConditions": [
+            "Chronic Atrial Fibrillation"
+          ],
+          "implants": [
+            "Dual-Chamber Cardiac Pacemaker (Verified surgical history)"
+          ],
+          "dnrStatus": "FULL_CODE",
+          "recordDate": "2026-09-18"
+        }
+      },
+      {
+        "hospitalId": "hospital-c",
+        "hospitalName": "Pacific Valley Health System",
+        "format": "CUSTOM_XML",
+        "rawRecord": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<EHRArchive xmlns=\"http://pacificvalleyhealth.org/ehr/v3\" version=\"3.2\">\n  <Header>\n    <FacilityName>Pacific Valley Health System</FacilityName>\n    <SubjectDID>cd3cdb72dbd103fcadf507117603f61c42afb65d5d562795b8daca0d66055ce9</SubjectDID>\n    <ExtractionDate>2026-09-18T19:08:06.648Z</ExtractionDate>\n    <ArchiveStatus>EMERGENCY_RECORDS</ArchiveStatus>\n  </Header>\n  <TraumaProfile>\n    <BloodTyping verification=\"lab-matched\">\n      <Group>O</Group>\n      <Rh>Positive</Rh>\n      <AssayedYear>2026</AssayedYear>\n    </BloodTyping>\n    <ImmunologyAllergies>\n      <AllergyEntry status=\"confirmed\" risk=\"high\">\n        <Agent>Penicillin G (Severe Anaphylaxis)</Agent>\n        <ReactionType>Severe systemic sensitivity</ReactionType>\n      </AllergyEntry>\n    </ImmunologyAllergies>\n    <CurrentPharmacotherapy>\n      <ActiveItem category=\"anticoagulant\">\n        <DrugName>Warfarin Sodium 5mg Daily</DrugName>\n        <Indication>Trauma caution: anticoagulant monitoring required</Indication>\n      </ActiveItem>\n    </CurrentPharmacotherapy>\n    <Diagnoses>\n      <Diagnosis code=\"TRAUMA.99\" status=\"active\">Chronic Atrial Fibrillation</Diagnosis>\n    </Diagnoses>\n    <ProstheticsAndImplants>\n      <ImplantEntry type=\"medical_device\">Dual-Chamber Cardiac Pacemaker</ImplantEntry>\n    </ProstheticsAndImplants>\n    <DirectiveStatus code=\"FULL_CODE\">\n      <ResuscitationCode>Full Code</ResuscitationCode>\n    </DirectiveStatus>\n  </TraumaProfile>\n</EHRArchive>",
+        "extractedAt": "2026-09-18T19:28:13.094Z",
+        "fields": {
+          "bloodType": "O +",
+          "allergies": [
+            "Penicillin G (Severe Anaphylaxis) (Severe systemic sensitivity) [Rec: 2019]"
+          ],
+          "medicationsAnticoagulants": [
+            "Warfarin Sodium 5mg Daily"
+          ],
+          "majorConditions": [
+            "Chronic Atrial Fibrillation"
+          ],
+          "implants": [
+            "Dual-Chamber Cardiac Pacemaker"
+          ],
+          "dnrStatus": "FULL_CODE",
+          "recordDate": "Unknown"
+        }
+      }
+    ]
+  }
+}

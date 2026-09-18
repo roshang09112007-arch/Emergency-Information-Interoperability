@@ -1,0 +1,6 @@
+{
+  "name": "PulseKey - Decentralized Emergency Medical Records",
+  "description": "Consent-less break-glass emergency medical records query system with federated hospital nodes, zero-knowledge role proof simulation, AI conflict reconciliation, and offline disaster-mode cache.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
